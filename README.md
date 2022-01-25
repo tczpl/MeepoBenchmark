@@ -40,6 +40,15 @@ $ python3 rq1-1_tps.py # or other Python script
 
 ### Taobao E-commerce Performance
 
+| TPS in differnt scales (4 consoritum members)    |  Processing time of block duration   |
+|  ----  | ----  |
+| ![image](png/rq2-1_shoptps.png)  | ![image](png/rq2-1_shopduration.png) |
+
+|  Cross-shard communication time per block | Number of cross-epochs  per block |
+|  ----  | ----  |
+| ![image](png/rq2-2_shopwithdrawtime.png)  | ![image](png/rq2-2_shopepochnumber.png) |
+
+
 
 
 
