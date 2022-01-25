@@ -27,12 +27,12 @@ $ python3 rq1-1_tps.py # or other Python script
 ## Key Results
 
 ### ERC20 Cross-shard Performance
-|  Cross-shard TPS in differnt scales (102400 accounts per shard)    |  Corresponding Latency in differnt scales (102400 accounts per shard)    |
+|  Cross-shard TPS in differnt scales (102400 accounts per shard, 32x4=128 machines in maximum)    |  Corresponding Latency in differnt scales  |
 |  ----  | ----  |
 | ![image](png/rq1-1_tps.png)  | ![image](png/rq1-1_latency.png) |
 
 
-|  Cross-shard TPS in differnt shards and total accounts (1 member) | Cross-shard TPS in differnt total accounts (32 shards, 4 consortium members, aka 128 machines)    |
+|  Cross-shard TPS in differnt shards and total accounts (1 member) | Cross-shard TPS in differnt total accounts (32 shards, 4 consortium members, 128 machines)    |
 |  ----  | ----  |
 | ![image](png/rq1-3_shardtps.png)  | ![image](png/rq1-3_accounttps.png) |
 
@@ -40,7 +40,7 @@ $ python3 rq1-1_tps.py # or other Python script
 
 ### Taobao E-commerce Performance
 
-| TPS in differnt scales (4 consoritum members)    |  Processing time of block duration   |
+| TPS in differnt scales (4 consoritum members, 32x4=128 machines in maximum)    |  Processing time of block duration   |
 |  ----  | ----  |
 | ![image](png/rq2-1_shoptps.png)  | ![image](png/rq2-1_shopduration.png) |
 
