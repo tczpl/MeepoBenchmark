@@ -9,7 +9,7 @@ In short, it provides open-source and reproducible benchmark results for [Meepo-
 
 ## Test-bed
 
-We use 128 AliCloud servers as a test bed. Each machine is euqiped with 4 vCPU, 32 GiB memory, and 894 GiB NVME disk. The detailed configuration of the ECS (ecs.i2.xlarge) can be found [here](https://help.aliyun.com/document_detail/25378.html?spm=5176.2020520101.help.dexternal.73954df5vwQcgq#i2).
+We use 128 AliCloud servers as a test bed. Each machine is equipped with 4 vCPU, 32 GiB memory, and 894 GiB NVME disk. The detailed configuration of the ECS (ecs.i2.xlarge) can be found [here](https://help.aliyun.com/document_detail/25378.html?spm=5176.2020520101.help.dexternal.73954df5vwQcgq#i2).
 
 ## Availibility
 
