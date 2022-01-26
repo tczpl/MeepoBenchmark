@@ -38,4 +38,6 @@ plt.legend(fontsize=20)
 
 plt.tight_layout()
 
-plt.savefig("rq1-1_tps.pdf")
+import sys
+plt.savefig(sys.argv[0][:-3]+".pdf")
+plt.savefig("png/"+sys.argv[0][:-3]+".png")

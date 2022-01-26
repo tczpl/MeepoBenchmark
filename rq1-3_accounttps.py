@@ -43,5 +43,6 @@ plt.legend(fontsize=15)
 
 plt.tight_layout()
 
-plt.savefig("rq1-3_accounttps.pdf")
-plt.savefig("png/rq1-3_accounttps.png")
+import sys
+plt.savefig(sys.argv[0][:-3]+".pdf")
+plt.savefig("png/"+sys.argv[0][:-3]+".png")

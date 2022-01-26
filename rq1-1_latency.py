@@ -40,5 +40,6 @@ plt.legend(loc=2, ncol=2, fontsize=18)#图例及位置： 1右上角，2 左上�
 
 plt.tight_layout()
 
-plt.savefig("rq1-1_latency.pdf")
-
+import sys
+plt.savefig(sys.argv[0][:-3]+".pdf")
+plt.savefig("png/"+sys.argv[0][:-3]+".png")

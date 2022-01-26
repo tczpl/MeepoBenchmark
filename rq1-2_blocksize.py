@@ -44,4 +44,6 @@ plt.ylim(0,35000)
 
 plt.tight_layout()
 
-plt.savefig("rq1-2_blocksize.pdf")
+import sys
+plt.savefig(sys.argv[0][:-3]+".pdf")
+plt.savefig("png/"+sys.argv[0][:-3]+".png")

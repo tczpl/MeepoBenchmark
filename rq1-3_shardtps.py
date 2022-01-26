@@ -54,4 +54,6 @@ plt.legend(loc=4, fontsize=20)#图例及位置： 1右上角，2 左上角 loc�
 
 plt.tight_layout()
 
-plt.savefig("rq1-3_shardtps.pdf")
+import sys
+plt.savefig(sys.argv[0][:-3]+".pdf")
+plt.savefig("png/"+sys.argv[0][:-3]+".png")

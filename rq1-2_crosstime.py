@@ -45,4 +45,6 @@ plt.yticks(fontsize=20)
 
 plt.tight_layout()
 
-plt.savefig("rq1-2_crosstime.pdf")
+import sys
+plt.savefig(sys.argv[0][:-3]+".pdf")
+plt.savefig("png/"+sys.argv[0][:-3]+".png")
