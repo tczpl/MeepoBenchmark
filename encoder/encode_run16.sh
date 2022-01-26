@@ -1,0 +1,16 @@
+node encode_runone.js 0 $1 &
+node encode_runone.js 1 $1 &
+node encode_runone.js 2 $1 &
+node encode_runone.js 3 $1 &
+node encode_runone.js 4 $1 &
+node encode_runone.js 5 $1 &
+node encode_runone.js 6 $1 &
+node encode_runone.js 7 $1 &
+node encode_runone.js 8 $1 &
+node encode_runone.js 9 $1 &
+node encode_runone.js 10 $1 &
+node encode_runone.js 11 $1 &
+node encode_runone.js 12 $1 &
+node encode_runone.js 13 $1 &
+node encode_runone.js 14 $1 &
+node encode_runone.js 15 $1 &

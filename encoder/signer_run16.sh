@@ -1,0 +1,16 @@
+./signer_runone.sh 0 &
+./signer_runone.sh 1 &
+./signer_runone.sh 2 &
+./signer_runone.sh 3 &
+./signer_runone.sh 4 &
+./signer_runone.sh 5 &
+./signer_runone.sh 6 &
+./signer_runone.sh 7 &
+./signer_runone.sh 8 &
+./signer_runone.sh 9 &
+./signer_runone.sh 10 &
+./signer_runone.sh 11 &
+./signer_runone.sh 12 &
+./signer_runone.sh 13 &
+./signer_runone.sh 14 &
+./signer_runone.sh 15 &

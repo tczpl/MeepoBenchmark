@@ -11,8 +11,13 @@ In short, it provides open-source and reproducible benchmark results for [Meepo-
 
 We use 128 AliCloud servers as a test bed. Each machine is equipped with 4 vCPU, 32 GiB memory, and 894 GiB NVME disk. The detailed configuration of the ECS (ecs.i2.xlarge) can be found [here](https://help.aliyun.com/document_detail/25378.html?spm=5176.2020520101.help.dexternal.73954df5vwQcgq#i2).
 
-## Availibility
+## Scripts
+The scripts are in `encoder/` and `client/`.
+First, we encode and sign the transactions for benchmark.
+Second, for each shard, we use a client to submit the transaction to blockchain one by one.
+All transactions are signed and sent in the way as the same as Ethereum, using Web3.js.
 
+## Availibility
 All the logs are in the `meepo128/` directory in this repo.
 With the following commands, you can verify the results afterwards.
 

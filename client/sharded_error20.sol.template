@@ -1,0 +1,31 @@
+pragma solidity 0.4.26;
+
+contract ShardedERC20 {
+    
+  mapping(uint => uint) public balanceOf;
+
+  bytes32 addFunc = keccak256("add(uint256,uint256)");
+  
+  event SEND(string indexed calltype, uint shard, address addr, bytes32 func, uint to, uint value);
+
+  function transfer(uint from, uint to, uint value) public {
+      // require(balanceOf[from]>=value); ! for test
+      balanceOf[from] -= value;
+      emit SEND("CrossCall", shardOf(to), this, addFunc, to, value);
+  }
+
+  function add(uint to, uint value) public cross {
+      require( to%100 > {{error_percent}} );
+      balanceOf[to] += value;
+  }
+
+  function shardOf(uint to) private pure returns (uint) {
+      return to%{{shard_cnt}};
+  }
+
+  modifier cross() {
+      require(msg.sender==address(this));
+      _;
+  }
+
+}

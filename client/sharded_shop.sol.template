@@ -1,0 +1,61 @@
+pragma solidity 0.4.26;
+
+contract ShardedShop {
+  struct User {
+      uint[] bought;
+      uint bill;
+  }
+  mapping(uint => User) public userOf;
+
+  struct Item {
+      uint stock;
+      uint price;
+  }
+  mapping(uint => Item) public itemOf;
+
+  function setItem(uint item, uint stock, uint price) public {
+      itemOf[item].stock = stock;
+      itemOf[item].price = price;
+  }
+
+  function buy(uint user, uint[] items) public {
+      for (uint index=0;index<items.length;index++) {
+          uint item = items[index];
+          userOf[user].bought.push(item);
+          emit SEND("CrossCall", shardOf(item), this, buyItemFunc, user, item, index, items.length);
+      }
+  }
+
+  function buyItem(uint user, uint item, uint index, uint length) public cross {
+      // require(itemOf[item].stock>0); ! for test
+      itemOf[item].stock -= 1;
+      uint[50] memory prices;
+      prices[index] = item; // itemOf[item].price; ! for test
+      emit SEND("PartialCrossCall", shardOf(user), this, settleFunc, user, prices, length);
+  }
+
+  function settle(uint user, uint[50] prices, uint length) public cross {
+      for (uint i=0;i<length;i++) {
+          userOf[user].bill += prices[i];
+      }
+  }
+
+  function billOf(uint user) public view returns (uint) {
+      return userOf[user].bill;
+  }
+
+  function shardOf(uint to) private pure returns (uint) {
+      return to%{{shard_cnt}};
+  }
+
+  bytes32 public settleFunc = keccak256("settle(uint256,uint256[50],uint256)");
+  bytes32 public buyItemFunc = keccak256("buyItem(uint256,uint256,uint256,uint256)");
+  
+  event SEND(string indexed calltype, uint shard, address addr, bytes32 func, uint user, uint[50] price, uint length);  
+  event SEND(string indexed calltype, uint shard, address addr, bytes32 func, uint user, uint item, uint index, uint length);  
+
+  modifier cross() {
+      require(msg.sender==address(this));
+      _;
+  }
+}

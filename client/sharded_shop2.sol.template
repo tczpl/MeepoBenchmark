@@ -1,0 +1,68 @@
+pragma solidity 0.4.26;
+
+contract ShardedShop2 {
+  struct User {
+      uint[] bought;
+      uint bill;
+  }
+  mapping(uint => User) public userOf;
+
+  struct Item {
+      uint stock;
+      uint price;
+  }
+  mapping(uint => Item) public itemOf;
+
+  function setItem(uint item, uint stock, uint price) public {
+      itemOf[item].stock = stock;
+      itemOf[item].price = price;
+  }
+
+  function buy(uint user, uint[] items) public {
+      uint[50] memory pass_items;
+      for (uint index=0;index<items.length;index++) {
+          uint item = items[index];
+          userOf[user].bought.push(item);
+          pass_items[index] = items[index];
+      }
+      uint one_bill = 0;
+      emit SEND("CrossCall", shardOf(item), this, buyItemFunc, user, pass_items, 0, items.length, one_bill);
+  }
+
+  function buyItem(uint user, uint[50] pass_items, uint index, uint length, uint one_bill) public cross {
+      // require(itemOf[item].stock>0); ! for test
+      uint item  = pass_items[index];
+      itemOf[item].stock -= 1;
+      one_bill += item; // itemOf[item].price; ! for test
+      index += 1;
+      if (index<length) {
+        emit SEND("CrossCall", shardOf(item), this, buyItemFunc, user, pass_items, index, length, one_bill);
+      }
+      else {
+        emit SEND("CrossCall", shardOf(user), this, settleFunc, user, one_bill);
+      }
+  }
+
+  function settle(uint user, uint one_bill) public cross {
+      userOf[user].bill += one_bill;
+  }
+
+  function billOf(uint user) public view returns (uint) {
+      return userOf[user].bill;
+  }
+
+  function shardOf(uint to) private pure returns (uint) {
+      return to%{{shard_cnt}};
+  }
+
+  bytes32 public settleFunc = keccak256("settle(uint256,uint256)");
+  bytes32 public buyItemFunc = keccak256("buyItem(uint256,uint256[50],uint256,uint256,uint256)");
+  
+  event SEND(string indexed calltype, uint shard, address addr, bytes32 func, uint user, uint one_bill);  
+  event SEND(string indexed calltype, uint shard, address addr, bytes32 func, uint user, uint[50] pass_items, uint index, uint length, uint one_bill);  
+
+  modifier cross() {
+      require(msg.sender==address(this));
+      _;
+  }
+}
